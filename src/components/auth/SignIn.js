@@ -1,6 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import {connect} from 'react-redux';
+import {signIn} from '../../redux/actions/authActions';
 
-function SignIn() {
+function SignIn({toSignIn, authErr}) {
     const [signIn, setSignIn] = useState({
         email: '',
         password: ''
@@ -15,7 +17,7 @@ function SignIn() {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log('Form Submitted');
-      console.log(signIn);
+      toSignIn(signIn);
       
     }
 
@@ -35,6 +37,9 @@ function SignIn() {
                 <div className="input-field">
                     <button className="btn pink lighten-1 z-depth-0">Login</button>
                 </div>
+                <div className="red-text center">
+                    {authErr ? (<small>{authErr}</small>) : null}
+                </div>
 
             </form>
             
@@ -42,4 +47,17 @@ function SignIn() {
     )
 }
 
-export default SignIn
+
+const mapStateToProps = state => {
+    return{
+        authErr: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        toSignIn: creds => dispatch(signIn(creds))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

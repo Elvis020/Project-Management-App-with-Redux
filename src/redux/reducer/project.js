@@ -1,3 +1,5 @@
+import {CREATE_PROJECT, CREATE_PROJECT_ERROR} from '../types/types';
+
 const initialState = {
     projectList: [{
             id: '1',
@@ -18,7 +20,17 @@ const initialState = {
 }
 
 const project = (state = initialState, action) => {
-    return state
+    switch(action.type){
+        case CREATE_PROJECT:
+            console.log('New Project created', action.payload)
+            return state;
+        case CREATE_PROJECT_ERROR:
+            console.log("Create Project error", action.payload)
+            return state;
+        default:
+            return state;
+        }
+        
 }
 
 

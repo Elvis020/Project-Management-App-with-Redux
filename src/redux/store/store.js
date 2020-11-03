@@ -1,5 +1,22 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import rootReducer from '../reducer';
-// Initializing Store with rootredeucer
+import thunk from 'redux-thunk';
+import {reduxFirestore,getFirestore} from 'redux-firestore';
+import {reactReduxFirebase,getFirebase} from 'react-redux-firebase';
+import firebaseConfig from '../../config/firebaseConfig';
 
-export const store = createStore(rootReducer)
+// Middlewares available
+// const middleWare = [thunk];
+
+
+// Initializing Store with rootreducer and 3 store enhancers
+export const store = createStore(
+rootReducer, 
+compose(
+    applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
+    reduxFirestore(firebaseConfig),
+    reactReduxFirebase(firebaseConfig)
+    )
+);
+
+// In combining several store enhancers we use compose to combine them

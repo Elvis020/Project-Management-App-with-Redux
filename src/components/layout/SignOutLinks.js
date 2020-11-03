@@ -7,7 +7,7 @@ function SignOutLinks() {
     return (
         <ul className="right">
             <li> <NavLink to='/signup'>SignUp</NavLink>  </li>
-            <li> <NavLink to='/signin'>Login </NavLink> </li>
+            <li> <NavLink to='/signin'>Signin </NavLink> </li>
         </ul>
     )
 }

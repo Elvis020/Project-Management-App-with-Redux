@@ -1,6 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
+import {connect} from 'react-redux';
+import {createProject} from '../../redux/actions/projectActions';
 
-function CreateProject() {
+function CreateProject({newProject}) {
     const [createProject, setCreateProject] = useState({
         title: '',
         content: ''
@@ -14,7 +16,7 @@ function CreateProject() {
     // Functinon to take care of form Submission
     const handleSubmit = (e) => {
       e.preventDefault();
-      console.log(createProject);
+      newProject(createProject);
       
     }
 
@@ -41,4 +43,12 @@ function CreateProject() {
     )
 }
 
-export default CreateProject
+
+// Mapping dispatch to props
+const mapDispatchToProps = (dispatch) => {
+    return {
+        newProject: (proj) => dispatch(createProject(proj))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject);

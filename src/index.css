@@ -28,13 +28,13 @@ form h5{
 input[type='text']:not(.browser-default):focus:not([readonly]),
 input[type='email']:not(.browser-default):focus:not([readonly]),
 input[type='password']:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]){
+textarea.materialize-textarea:focus:not([readonly]) {
   border-color: #ec407a;
   box-shadow: none;
   transition: all .7s ease-in;
 }
 
-.active {
+li .active {
   background-color:  #ec4079c4;
   transition: all .5s ease;
 }
