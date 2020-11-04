@@ -5,12 +5,12 @@ import {signOut} from '../../redux/actions/authActions';
 
 
 
-function SignInLinks({toSignOut}) {
+function SignInLinks({toSignOut, profile}) {
     return (
         <ul className="right">
             <li> <NavLink to='/create'>New Project</NavLink>  </li>
             <li> <NavLink onClick={toSignOut} to='/'>Sign Out </NavLink> </li>
-            <li> <NavLink to='/' className="btn btn-floating pink lighten-2">NN </NavLink> </li>
+            <li> <NavLink to='/' className="btn btn-floating pink lighten-2"> {profile.initials}  </NavLink> </li>
         </ul>
     )
 }

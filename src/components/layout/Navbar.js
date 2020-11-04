@@ -4,13 +4,13 @@ import SignInLinks from './SignInLinks';
 import SignOutLinks from './SignOutLinks';
 import {connect} from 'react-redux';
 
-function Navbar({isAuth}) {
+function Navbar({isAuth, profile}) {
     return (
         <nav className="nav-wrapper grey darken-2">
             <div className="container">
                 <Link to='/'  className="brand-logo">Spacey's Plan</Link>
                 {isAuth.uid ? (
-                    <SignInLinks />
+                    <SignInLinks profile={profile} />
                     ):(
                     <SignOutLinks />
                 )}
@@ -24,7 +24,8 @@ function Navbar({isAuth}) {
 const mapStateToProps = state => {
     console.log(state)
     return {
-        isAuth: state.firebase.auth
+        isAuth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 
