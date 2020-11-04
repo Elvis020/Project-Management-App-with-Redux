@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import {signIn} from '../../redux/actions/authActions';
+import {Redirect} from 'react-router-dom';
 
-function SignIn({toSignIn, authErr}) {
+function SignIn({toSignIn, authErr, isLoggedInAuth}) {
     const [signIn, setSignIn] = useState({
         email: '',
         password: ''
@@ -21,6 +22,7 @@ function SignIn({toSignIn, authErr}) {
       
     }
 
+    if (isLoggedInAuth.uid) return <Redirect to='/' />
 
     return (
         <div className="container">
@@ -50,7 +52,8 @@ function SignIn({toSignIn, authErr}) {
 
 const mapStateToProps = state => {
     return{
-        authErr: state.auth.authError
+        authErr: state.auth.authError,
+        isLoggedInAuth: state.firebase.auth
     }
 }
 

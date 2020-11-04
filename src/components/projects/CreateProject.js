@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import {connect} from 'react-redux';
 import {createProject} from '../../redux/actions/projectActions';
+import {Redirect} from 'react-router-dom';
 
-function CreateProject({newProject}) {
+function CreateProject({newProject, auth}) {
     const [createProject, setCreateProject] = useState({
         title: '',
         content: ''
@@ -20,7 +21,7 @@ function CreateProject({newProject}) {
       
     }
 
-
+    if(!auth.uid) return <Redirect to='/signin' />
     return ( 
         <div className="container">
             <form onSubmit={handleSubmit}  className="white">
@@ -34,7 +35,7 @@ function CreateProject({newProject}) {
                     <textarea id='content'onChange={handleChange} className="materialize-textarea" ></textarea>
                 </div>
                 <div className="input-field">
-                    <button className="btn pink lighten-1 z-depth-0">Create</button>
+                    <button onClick={() => <Redirect to='/' />} className="btn pink lighten-1 z-depth-0">Create</button>
                 </div>
 
             </form>
@@ -42,7 +43,12 @@ function CreateProject({newProject}) {
         </div>
     )
 }
-
+// Mapping State to Props
+const mapStateToProps = state => {
+    return {
+        auth: state.firebase.auth
+    }
+}
 
 // Mapping dispatch to props
 const mapDispatchToProps = (dispatch) => {
@@ -51,4 +57,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateProject);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);

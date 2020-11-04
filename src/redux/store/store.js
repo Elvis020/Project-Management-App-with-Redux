@@ -15,7 +15,7 @@ rootReducer,
 compose(
     applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
     reduxFirestore(firebaseConfig),
-    reactReduxFirebase(firebaseConfig)
+    reactReduxFirebase(firebaseConfig, {attachAuthIsReady: true})
     )
 );
 
